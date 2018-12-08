@@ -19,6 +19,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
+import projet.agenda.GestionAgenda;
 /**
  *
  * @author Ludo
@@ -78,8 +79,10 @@ public class AffichageSimple extends JFrame {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
     cardL.next(content);
+    GestionAgenda ga = new GestionAgenda();
     //Agenda ag = new Agenda(texte1.getText());
-    System.out.println("chopé!");
+    System.out.println(ga.lireNomFichierAgenda().toString());
+    
     }
     });
     //Gestion de l'ouverture de l'agenda 

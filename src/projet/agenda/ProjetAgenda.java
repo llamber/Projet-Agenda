@@ -35,9 +35,11 @@ public class ProjetAgenda {
         Scanner sc = new Scanner(System.in);
         int choix1 = 0;
         do {
+            GestionAgenda ga = new GestionAgenda();
             AffichageSimple.affichermenu1();
             choix1 = sc.nextInt();
-            traiterChoixMenu1(choix1);
+            //ga.traiterChoixMenu1(choix1);
+            ga.traiterChoixMenu1(choix1);
         } while (choix1 != 3);
 
     }
@@ -46,7 +48,7 @@ public class ProjetAgenda {
      * @param choix
      * @throws IOException
      */
-    static private void traiterChoixMenu1(int choix) throws IOException {
+    /*static private void traiterChoixMenu1(int choix) throws IOException {
         AffichageSimple.affichageTraitementMenu1(choix);
 
         switch (choix) {
@@ -63,7 +65,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private String lireNomFichierAgenda() {
         AffichageSimple.afficherSaisiNom();
         Scanner sc = new Scanner(System.in);
@@ -83,7 +85,7 @@ public class ProjetAgenda {
 
     /**
      * @throws IOException
-     */
+     
     static private void traiterChoixOuvrirAgenda() throws IOException {
         Agenda agendaOuvert = null;
         String nomFichier = lireNomFichierAgenda();
@@ -93,7 +95,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static public void gererAgenda(Agenda agenda, String nomFichier) {
         int choix;
         Scanner sc = new Scanner(System.in);
@@ -113,7 +115,7 @@ public class ProjetAgenda {
      *
      * @param choix
      * @param agenda
-     */
+     
     static public void traiterChoixMenu2(int choix, Agenda agenda) {
         AffichageSimple.affichageTraitementMenu2(choix);
 
@@ -152,7 +154,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixAfficherRDV_Entre2Dates(Agenda agenda) {
         LocalDate date1 = Date();
         LocalDate date2 = Date();
@@ -165,7 +167,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixAfficherRDV_SurCritères(Agenda agenda) {
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
@@ -188,7 +190,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixAjouterRDV(Agenda agenda) {
         LocalDate date = Date();
         LocalTime hDebut = heureDebut();
@@ -201,7 +203,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixModifierRDV(Agenda agenda) {
         AffichageSimple.afficherRdv(agenda);
         Scanner sc = new Scanner(System.in);
@@ -217,7 +219,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixSupprimerRDV(Agenda agenda) {
         AffichageSimple.afficherRdv(agenda);
         Scanner sc = new Scanner(System.in);
@@ -228,7 +230,7 @@ public class ProjetAgenda {
 
     /**
      * @param agenda
-     */
+     
     static private void traiterChoixSupprimerTousRDV(Agenda agenda) {
         agenda.getListeRdv().forEach((_item) -> {
             agenda.getListeRdv().remove(1);
@@ -238,7 +240,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private LocalDate Date() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiDate();
@@ -249,7 +251,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private LocalTime heureDebut() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiHeureDebut();
@@ -260,7 +262,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private LocalTime heureFin() {
         LocalTime heureFin;
         Scanner sc = new Scanner(System.in);
@@ -277,7 +279,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private String libelle() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiLibelle();
@@ -287,7 +289,7 @@ public class ProjetAgenda {
 
     /**
      * @return
-     */
+     
     static private boolean rappel() {
         Scanner sc = new Scanner(System.in);
 
@@ -309,7 +311,7 @@ public class ProjetAgenda {
     /**
      * @param agenda
      * @throws IOException
-     */
+     
     static private void save(Agenda agenda, String nomFichier) throws IOException {
         FileOutputStream fos;
         ObjectOutputStream oos;
@@ -324,7 +326,7 @@ public class ProjetAgenda {
      * @param nomFichierAgenda
      * @return
      * @throws IOException
-     */
+     
     static private Agenda load(String nomFichierAgenda) throws IOException {
         FileInputStream fis;
         ObjectInputStream ois;
@@ -339,5 +341,5 @@ public class ProjetAgenda {
         ois.close();
         return agenda;
     }
-
+*/
 }
