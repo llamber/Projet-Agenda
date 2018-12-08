@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package projet.agenda;
+
 import Modele.Agenda;
 import Modele.RendezVous;
 import Vue.AffichageSimple;
@@ -15,26 +16,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 /**
  *
  * @author Pierre
  */
-
-public class GestionAgenda {
-    String nom;
-    Agenda ag = new Agenda(nom);
-    public GestionAgenda(Agenda agenda){
-     this.ag = agenda; 
-    }
+public class GestionAgenda implements Serializable {
 
     /**
      * @param choix
      * @throws IOException
      */
-    static public void traiterChoixMenu1(int choix) throws IOException {
+    public static void traiterChoixMenu1(int choix) throws IOException, ClassNotFoundException {
         AffichageSimple.affichageTraitementMenu1(choix);
-
         switch (choix) {
             case 1:
                 traiterChoixCreerAgenda();
@@ -50,13 +45,14 @@ public class GestionAgenda {
     /**
      * @return
      */
+    static public void traiterChoixCreerAgenda() {
 
-    static private void traiterChoixCreerAgenda() {
- 
         AffichageSimple.afficherSaisiNom();
         Scanner sc = new Scanner(System.in);
+        String nom = sc.nextLine();
+        Agenda ag = new Agenda(nom);
         try {
-            save(ag);
+            save(ag, nom);
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,19 +61,18 @@ public class GestionAgenda {
     /**
      * @throws IOException
      */
-    static private void traiterChoixOuvrirAgenda() throws IOException {
-        Agenda agendaOuvert = null;
-         AffichageSimple.afficherSaisiNom();
+    public static void traiterChoixOuvrirAgenda() throws IOException, ClassNotFoundException {
+        AffichageSimple.afficherSaisiNom();
         Scanner sc = new Scanner(System.in);
-        String nomFichierAgenda = sc.nextLine();
-        agendaOuvert = load(nomFichierAgenda);
-        gererAgenda(agendaOuvert,nomFichierAgenda);
+        String nomAgenda = sc.nextLine();
+        Agenda agendaOuvert = load(nomAgenda);
+        gererAgenda(agendaOuvert);
     }
 
     /**
      * @param agenda
      */
-    static public void gererAgenda(Agenda agenda, String nomFichier) {
+    public static void gererAgenda(Agenda agenda) {
         int choix;
         Scanner sc = new Scanner(System.in);
         do {
@@ -86,7 +81,7 @@ public class GestionAgenda {
             traiterChoixMenu2(choix, agenda);
         } while (choix != 7);
         try {
-            save(agenda, nomFichier);
+            save(agenda,agenda.getNom());
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +92,7 @@ public class GestionAgenda {
      * @param choix
      * @param agenda
      */
-    static public void traiterChoixMenu2(int choix, Agenda agenda) {
+    public static void traiterChoixMenu2(int choix, Agenda agenda) {
         AffichageSimple.affichageTraitementMenu2(choix);
 
         switch (choix) {
@@ -136,7 +131,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixAfficherRDV_Entre2Dates(Agenda agenda) {
+    public static void traiterChoixAfficherRDV_Entre2Dates(Agenda agenda) {
         LocalDate date1 = Date();
         LocalDate date2 = Date();
         for (int i = 0; i < agenda.getListeRdv().size(); i++) {
@@ -149,7 +144,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixAfficherRDV_SurCritères(Agenda agenda) {
+    public static void traiterChoixAfficherRDV_SurCritères(Agenda agenda) {
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
         AffichageSimple.afficherRDV_SurCritères(agenda, choix);
@@ -172,7 +167,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixAjouterRDV(Agenda agenda) {
+    public static void traiterChoixAjouterRDV(Agenda agenda) {
         LocalDate date = Date();
         LocalTime hDebut = heureDebut();
         LocalTime hFin = heureFin();
@@ -185,7 +180,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixModifierRDV(Agenda agenda) {
+    public static void traiterChoixModifierRDV(Agenda agenda) {
         AffichageSimple.afficherRdv(agenda);
         Scanner sc = new Scanner(System.in);
         int index = sc.nextInt();
@@ -201,7 +196,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixSupprimerRDV(Agenda agenda) {
+    public static void traiterChoixSupprimerRDV(Agenda agenda) {
         AffichageSimple.afficherRdv(agenda);
         Scanner sc = new Scanner(System.in);
         int index = sc.nextInt();
@@ -212,7 +207,7 @@ public class GestionAgenda {
     /**
      * @param agenda
      */
-    static private void traiterChoixSupprimerTousRDV(Agenda agenda) {
+    public static void traiterChoixSupprimerTousRDV(Agenda agenda) {
         agenda.getListeRdv().forEach((_item) -> {
             agenda.getListeRdv().remove(1);
 
@@ -222,7 +217,7 @@ public class GestionAgenda {
     /**
      * @return
      */
-    static private LocalDate Date() {
+    static public LocalDate Date() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiDate();
         String saisiDate = sc.nextLine();
@@ -233,7 +228,7 @@ public class GestionAgenda {
     /**
      * @return
      */
-    static private LocalTime heureDebut() {
+    public static LocalTime heureDebut() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiHeureDebut();
         String saisiHeureDebut = sc.nextLine();
@@ -244,7 +239,7 @@ public class GestionAgenda {
     /**
      * @return
      */
-    static private LocalTime heureFin() {
+    public static LocalTime heureFin() {
         LocalTime heureFin;
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiHeureFin();
@@ -261,7 +256,7 @@ public class GestionAgenda {
     /**
      * @return
      */
-    static private String libelle() {
+    public static String libelle() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiLibelle();
         String libelle = "fzefez";//sc.nextLine();
@@ -271,7 +266,7 @@ public class GestionAgenda {
     /**
      * @return
      */
-    static private boolean rappel() {
+    public static boolean rappel() {
         Scanner sc = new Scanner(System.in);
 
         String saisiRappel;
@@ -293,7 +288,7 @@ public class GestionAgenda {
      * @param agenda
      * @throws IOException
      */
-    static private void save(Agenda agenda, String nomFichier) throws IOException {
+    public static void save(Agenda agenda, String nomFichier) throws IOException {
         FileOutputStream fos;
         ObjectOutputStream oos;
         fos = new FileOutputStream(nomFichier);
@@ -308,19 +303,15 @@ public class GestionAgenda {
      * @return
      * @throws IOException
      */
-    static private Agenda load(String nomFichierAgenda) throws IOException {
+    public static Agenda load(String nomAgenda) throws IOException, ClassNotFoundException {
         FileInputStream fis;
         ObjectInputStream ois;
-        fis = new FileInputStream(nomFichierAgenda);
+        fis = new FileInputStream("Fichier");
         ois = new ObjectInputStream(fis);
-        Agenda agenda = null;
-        try {
-            agenda = (Agenda) ois.readObject();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Agenda ag;
+        ag = (Agenda) ois.readObject();
         ois.close();
-        return agenda;
+        return ag;
     }
 
 }

@@ -27,42 +27,38 @@ import projet.agenda.GestionAgenda;
  * @author Pierre
  */
 public class fenetre2 extends JFrame {
+
     private JButton bouton1 = new JButton("Mettre le nom agenda");
     private JButton bouton2 = new JButton("annuler");
-    public fenetre2()
-    {
+
+    public fenetre2() {
         //titre de la fenetre
         setTitle("Creation de l'agenda");
         //Modifier la taille
-        setSize(400,400);
+        setSize(400, 400);
         //Taille nom modifiable par l'utilisateur
         setResizable(false);
         //Cliquer sur crois permet la fermeture du programme
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //Centrer la fentre par rapport à l'écran de  l'odinateur
         setLocationRelativeTo(null);
         //Gestion de la creation de l'agenda
-        bouton1.addActionListener(new ActionListener()
-        {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) 
-        {
-            //Agenda ag = new Agenda(nomag.getText());
-            //JOptionPane.showMessageDialog(, "Printing complete");
-            JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-            String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
-            jop2.showMessageDialog(null, "Votre nom est " + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
-            Agenda ag = new Agenda(nom);
-            GestionAgenda GA = new GestionAgenda(ag);
-        }
+        bouton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                //Agenda ag = new Agenda(nomag.getText());
+                //JOptionPane.showMessageDialog(, "Printing complete");
+                JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+                String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
+                jop2.showMessageDialog(null, "Votre nom est " + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
+
+            }
         });
-        bouton2.addActionListener(new ActionListener()
-        {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) 
-        {
-            System.exit(0);
-           
-        }
+        bouton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.exit(0);
+
+            }
         });
         //gestion ergonomie
         //4 ligne sur 1 colonnes
@@ -74,7 +70,6 @@ public class fenetre2 extends JFrame {
         getContentPane().add(bouton1);
         getContentPane().add(bouton2);
 
-	}
+    }
 
-    
 }

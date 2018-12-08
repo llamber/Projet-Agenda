@@ -28,20 +28,17 @@ public class ProjetAgenda {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         // TODO code application logic here
         AffichageSimple maFenetre = new AffichageSimple();
         maFenetre.setVisible(true);
         Scanner sc = new Scanner(System.in);
         int choix1 = 0;
         do {
-            GestionAgenda ga = new GestionAgenda(); //probleme
             AffichageSimple.affichermenu1();
             choix1 = sc.nextInt();
-            //ga.traiterChoixMenu1(choix1);
-            ga.traiterChoixMenu1(choix1);
+            GestionAgenda.traiterChoixMenu1(choix1);
         } while (choix1 != 3);
-
     }
 
     /**

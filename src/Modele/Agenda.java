@@ -32,6 +32,10 @@ public class Agenda implements Serializable {
         this.listeRdv = listeRdv;
         
     }
+    
+    public String getNom() {
+        return nom;
+    }
 
 }
   
