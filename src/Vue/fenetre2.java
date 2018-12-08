@@ -27,10 +27,8 @@ import projet.agenda.GestionAgenda;
  * @author Pierre
  */
 public class fenetre2 extends JFrame {
-    private JLabel label1 = new JLabel("Veuillez saisir votre nom");
-    private JButton bouton1 = new JButton("Accepter");
+    private JButton bouton1 = new JButton("Mettre le nom agenda");
     private JButton bouton2 = new JButton("annuler");
-    private JTextField nomag = new JTextField("mettre le nom agenda");
     public fenetre2()
     {
         //titre de la fenetre
@@ -54,6 +52,7 @@ public class fenetre2 extends JFrame {
             JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
             String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
             jop2.showMessageDialog(null, "Votre nom est " + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
+            Agenda ag = new Agenda(nom);
         }
         });
         bouton2.addActionListener(new ActionListener()
@@ -71,8 +70,6 @@ public class fenetre2 extends JFrame {
         gl.setRows(3);
         setLayout(gl);
         //ajout des panneaux sur la fenetre
-        getContentPane().add(label1);
-        getContentPane().add(nomag);
         getContentPane().add(bouton1);
         getContentPane().add(bouton2);
         

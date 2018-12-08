@@ -35,7 +35,7 @@ public class ProjetAgenda {
         Scanner sc = new Scanner(System.in);
         int choix1 = 0;
         do {
-            GestionAgenda ga = new GestionAgenda();
+            GestionAgenda ga = new GestionAgenda(); //probleme
             AffichageSimple.affichermenu1();
             choix1 = sc.nextInt();
             //ga.traiterChoixMenu1(choix1);

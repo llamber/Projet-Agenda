@@ -19,6 +19,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.JOptionPane;
 import projet.agenda.GestionAgenda;
 /**
  *
@@ -80,6 +81,11 @@ public class AffichageSimple extends JFrame {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
     cardL.next(content);
+    //JOptionPane.showMessageDialog(, "Printing complete");
+    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+    String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
+    jop2.showMessageDialog(null, "vvous avez récupérer l'agenda de" + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
+    Agenda ag = new Agenda(nom);
     
     }
     }); 
