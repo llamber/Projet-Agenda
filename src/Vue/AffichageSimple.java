@@ -48,26 +48,12 @@ public class AffichageSimple extends JFrame {
     //Cliquer sur crois permet la fermeture du programme
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //Centrer la fentre par rapport à l'écran de  l'odinateur
     setLocationRelativeTo(null);
-    //Creation pan1 ajout d'un texte et couleur pour diferencier du pan2
-    JPanel pan1 = new JPanel();
-    pan1.add(new JTextField("Creation de l'agenda"));
-    
-    pan1.setBackground(Color.BLUE);
-    //Creation pan2 ajout d'un texte et couleur pour diferencier du pan3 et pan1
-    JPanel pan2 = new JPanel();
-    pan2.add(new JTextField("Ouverture de l'agenda"));    
-    pan2.setBackground(Color.RED);
-    //Creation du pan3 
-    JPanel pan3 = new JPanel();
-    pan3.add(new JTextField("Annuler"));    
-    pan3.setBackground(Color.YELLOW);  
     //Creation du panneau bouton pane qui va contenir nos boutons
     //Gestion de la creation de l'agenda
     JPanel boutonPane1 = new JPanel();
     bouton1.addActionListener(new ActionListener(){
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-    cardL.next(content);
         if((JButton)e.getSource()==bouton1)
         {
             new fenetre2().setVisible(true);
@@ -80,21 +66,28 @@ public class AffichageSimple extends JFrame {
     bouton2.addActionListener(new ActionListener(){
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-    cardL.next(content);
     //JOptionPane.showMessageDialog(, "Printing complete");
     JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
     String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
-    jop2.showMessageDialog(null, "vvous avez récupérer l'agenda de" + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
+    jop2.showMessageDialog(null, "vous avez récupérer l'agenda de" + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
     Agenda ag = new Agenda(nom);
-    
-    }
+    //dire que 
+    if(nom != null)
+        {
+        if((JButton)e.getSource()==bouton2)
+        {
+            new fenetre3().setVisible(true);
+            setVisible(false);
+        }
+        
+        }
+     }
     }); 
     //Gestion de l'annulation de la page
     JPanel boutonPane3 = new JPanel();
     bouton3.addActionListener(new ActionListener(){
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-    cardL.next(content);
     System.exit(0);
     }
     });      
@@ -104,10 +97,6 @@ public class AffichageSimple extends JFrame {
     boutonPane3.add(bouton3);
     //Definition du Layout
     content.setLayout(cardL);
-    //ajout des panneaux pan1 et pan2 et pan3 sur notre content
-    content.add(pan1);
-    content.add(pan2);
-    content.add(pan3);
     //4 ligne sur 1 colonnes
     GridLayout gl = new GridLayout();
     gl.setColumns(1);

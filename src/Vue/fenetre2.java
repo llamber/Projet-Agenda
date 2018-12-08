@@ -41,7 +41,6 @@ public class fenetre2 extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //Centrer la fentre par rapport à l'écran de  l'odinateur
         setLocationRelativeTo(null);
         //Gestion de la creation de l'agenda
-        JPanel boutonPane1 = new JPanel();
         bouton1.addActionListener(new ActionListener()
         {
         @Override
@@ -53,6 +52,7 @@ public class fenetre2 extends JFrame {
             String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
             jop2.showMessageDialog(null, "Votre nom est " + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
             Agenda ag = new Agenda(nom);
+            GestionAgenda GA = new GestionAgenda(ag);
         }
         });
         bouton2.addActionListener(new ActionListener()
@@ -61,6 +61,7 @@ public class fenetre2 extends JFrame {
         public void actionPerformed(java.awt.event.ActionEvent e) 
         {
             System.exit(0);
+           
         }
         });
         //gestion ergonomie
@@ -72,7 +73,8 @@ public class fenetre2 extends JFrame {
         //ajout des panneaux sur la fenetre
         getContentPane().add(bouton1);
         getContentPane().add(bouton2);
-        
-        
-    }
+
+	}
+
+    
 }
