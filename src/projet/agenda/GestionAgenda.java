@@ -132,8 +132,8 @@ public class GestionAgenda implements Serializable {
      * @param agenda
      */
     public static void traiterChoixAfficherRDV_Entre2Dates(Agenda agenda) {
-        LocalDate date1 = Date();
-        LocalDate date2 = Date();
+        LocalDate date1 = saisiDate();
+        LocalDate date2 = saisiDate();
         for (int i = 0; i < agenda.getListeRdv().size(); i++) {
             if (agenda.getListeRdv().get(i).getDate().isAfter(date1) && agenda.getListeRdv().get(i).getDate().isBefore(date2)) {
                 AffichageSimple.afficherRDV_Entre2Dates(agenda, i);
@@ -168,11 +168,11 @@ public class GestionAgenda implements Serializable {
      * @param agenda
      */
     public static void traiterChoixAjouterRDV(Agenda agenda) {
-        LocalDate date = Date();
-        LocalTime hDebut = heureDebut();
-        LocalTime hFin = heureFin();
-        boolean rappel = rappel();
-        String libelle = libelle();
+        LocalDate date = saisiDate();
+        LocalTime hDebut = saisiHeureDebut();
+        LocalTime hFin = saisiHeureFin();
+        boolean rappel = saisiRappel();
+        String libelle = saisiLibelle();
         RendezVous rdv = new RendezVous(date, hDebut, hFin, rappel, libelle);
         agenda.getListeRdv().add(rdv);
     }
@@ -184,11 +184,11 @@ public class GestionAgenda implements Serializable {
         AffichageSimple.afficherRdv(agenda);
         Scanner sc = new Scanner(System.in);
         int index = sc.nextInt();
-        LocalDate date = Date();
-        LocalTime hDebut = heureDebut();
-        LocalTime hFin = heureFin();
-        boolean rappel = rappel();
-        String libelle = libelle();
+        LocalDate date = saisiDate();
+        LocalTime hDebut = saisiHeureDebut();
+        LocalTime hFin = saisiHeureFin();
+        boolean rappel = saisiRappel();
+        String libelle = saisiLibelle();
         RendezVous rdv = new RendezVous(date, hDebut, hFin, rappel, libelle);
         agenda.getListeRdv().set(index, rdv);
     }
@@ -217,7 +217,7 @@ public class GestionAgenda implements Serializable {
     /**
      * @return
      */
-    static public LocalDate Date() {
+    static public LocalDate saisiDate() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiDate();
         String saisiDate = sc.nextLine();
@@ -228,7 +228,7 @@ public class GestionAgenda implements Serializable {
     /**
      * @return
      */
-    public static LocalTime heureDebut() {
+    public static LocalTime saisiHeureDebut() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiHeureDebut();
         String saisiHeureDebut = sc.nextLine();
@@ -239,13 +239,13 @@ public class GestionAgenda implements Serializable {
     /**
      * @return
      */
-    public static LocalTime heureFin() {
+    public static LocalTime saisiHeureFin() {
         LocalTime heureFin;
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiHeureFin();
         String saisiHeureFin = sc.nextLine();
         heureFin = LocalTime.parse(saisiHeureFin, DateTimeFormatter.ofPattern("kk:mm"));
-        while (heureFin.isBefore(heureDebut())) { //On verifie que l'heure de dÃ©but et plus petite que l'heure de fin
+        while (heureFin.isBefore(saisiHeureDebut())) { //On verifie que l'heure de dÃ©but et plus petite que l'heure de fin
             AffichageSimple.afficherHeureFinSuperieur();
             saisiHeureFin = sc.nextLine();
             heureFin = LocalTime.parse(saisiHeureFin, DateTimeFormatter.ofPattern("kk:mm"));
@@ -256,7 +256,7 @@ public class GestionAgenda implements Serializable {
     /**
      * @return
      */
-    public static String libelle() {
+    public static String saisiLibelle() {
         Scanner sc = new Scanner(System.in);
         AffichageSimple.afficherSaisiLibelle();
         String libelle = "fzefez";//sc.nextLine();
@@ -266,7 +266,7 @@ public class GestionAgenda implements Serializable {
     /**
      * @return
      */
-    public static boolean rappel() {
+    public static boolean saisiRappel() {
         Scanner sc = new Scanner(System.in);
 
         String saisiRappel;
