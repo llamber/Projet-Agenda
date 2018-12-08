@@ -35,9 +35,6 @@ public class AffichageSimple extends JFrame {
     
     public AffichageSimple() 
     {
-    //Initialisation
-    
-    
     //String nomAg = ag.getNomPersonne();
     //app.Agenda(ag);
     CardLayout cardL = new CardLayout();
@@ -63,15 +60,6 @@ public class AffichageSimple extends JFrame {
     JPanel pan3 = new JPanel();
     pan3.add(new JTextField("Annuler"));    
     pan3.setBackground(Color.YELLOW);  
-    //ajout du gestionnaire de composant BorderLayout
-    //conteneur.setLayout(new BorderLayout());
-    //Ajout de label
-    //conteneur.add(label1,BorderLayout.NORTH);
-    //Ajout bouton sur le conteneur
-    //conteneur.add(bouton1,BorderLayout.WEST);
-    //conteneur.add(bouton2,BorderLayout.CENTER);
-    //conteneur.add(bouton3,BorderLayout.EAST);
-    //setContentPane(conteneur); 
     //Creation du panneau bouton pane qui va contenir nos boutons
     //Gestion de la creation de l'agenda
     JPanel boutonPane1 = new JPanel();
@@ -79,10 +67,11 @@ public class AffichageSimple extends JFrame {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
     cardL.next(content);
-    GestionAgenda ga = new GestionAgenda();
-    //Agenda ag = new Agenda(texte1.getText());
-    System.out.println(ga.lireNomFichierAgenda().toString());
-    
+        if((JButton)e.getSource()==bouton1)
+        {
+            new fenetre2().setVisible(true);
+            setVisible(false);
+        }
     }
     });
     //Gestion de l'ouverture de l'agenda 
@@ -128,8 +117,6 @@ public class AffichageSimple extends JFrame {
     getContentPane().add(content);
 
     }            
-    
-    
     static public void affichermenu1() {
         System.out.println("Bienvenue dans le menu principal");
         System.out.println("1: nouvel agenda" + "\n" + "2: ouvrir agenda" + "\n" + "3: annuler");

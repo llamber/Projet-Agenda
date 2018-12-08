@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class Agenda implements Serializable {
     // Déclaration des variables ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ArrayList<RendezVous>listeRdv;
- 
+        String nom;
 
     // Creation de l'objet agenda
 
-    public Agenda(){
+    public Agenda(String nom){
         listeRdv = new ArrayList<>();
-        
+        this.nom = nom;
     }
 
     public ArrayList<RendezVous> getListeRdv() {

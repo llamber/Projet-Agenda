@@ -20,9 +20,12 @@ import java.util.logging.Logger;
  *
  * @author Pierre
  */
+
 public class GestionAgenda {
-    public GestionAgenda(){
-        Agenda ag = new Agenda();
+    String nom;
+    Agenda ag = new Agenda(nom);
+    public GestionAgenda(Agenda agenda){
+     this.ag = agenda; 
     }
 
     /**
@@ -49,12 +52,11 @@ public class GestionAgenda {
      */
 
     static private void traiterChoixCreerAgenda() {
-        Agenda nouvelAgenda = new Agenda();
+ 
         AffichageSimple.afficherSaisiNom();
         Scanner sc = new Scanner(System.in);
-        String nomFichierAgenda = sc.nextLine();
         try {
-            save(nouvelAgenda,nomFichierAgenda);
+            save(ag);
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
