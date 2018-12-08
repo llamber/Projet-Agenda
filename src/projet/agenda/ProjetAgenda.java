@@ -73,8 +73,9 @@ public class ProjetAgenda {
 
     static private void traiterChoixCreerAgenda() {
         Agenda nouvelAgenda = new Agenda();
+        String nomFichier = lireNomFichierAgenda();
         try {
-            save(nouvelAgenda);
+            save(nouvelAgenda,nomFichier);
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,14 +86,15 @@ public class ProjetAgenda {
      */
     static private void traiterChoixOuvrirAgenda() throws IOException {
         Agenda agendaOuvert = null;
-        agendaOuvert = load(lireNomFichierAgenda());
-        gererAgenda(agendaOuvert);
+        String nomFichier = lireNomFichierAgenda();
+        agendaOuvert = load(nomFichier);
+        gererAgenda(agendaOuvert, nomFichier);
     }
 
     /**
      * @param agenda
      */
-    static public void gererAgenda(Agenda agenda) {
+    static public void gererAgenda(Agenda agenda, String nomFichier) {
         int choix;
         Scanner sc = new Scanner(System.in);
         do {
@@ -101,7 +103,7 @@ public class ProjetAgenda {
             traiterChoixMenu2(choix, agenda);
         } while (choix != 7);
         try {
-            save(agenda);
+            save(agenda, nomFichier);
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -308,10 +310,10 @@ public class ProjetAgenda {
      * @param agenda
      * @throws IOException
      */
-    static private void save(Agenda agenda) throws IOException {
+    static private void save(Agenda agenda, String nomFichier) throws IOException {
         FileOutputStream fos;
         ObjectOutputStream oos;
-        fos = new FileOutputStream(lireNomFichierAgenda());
+        fos = new FileOutputStream(nomFichier);
         oos = new ObjectOutputStream(fos);
         oos.writeObject(agenda);
         oos.flush();
