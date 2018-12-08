@@ -29,7 +29,6 @@ import projet.agenda.GestionAgenda;
 public class AffichageSimple extends JFrame {
 
     private JLabel label1 = new JLabel("Bonjour et bienvenue dans le L&P calendar");
-    private JLabel label2 = new JLabel("");
     //private JPanel conteneur = new JPanel();
     private JButton bouton1 = new JButton("Créer agenda");
     private JButton bouton2 = new JButton("Ouvrir agenda");
@@ -47,7 +46,8 @@ public class AffichageSimple extends JFrame {
         //Taille nom modifiable par l'utilisateur
         setResizable(false);
         //Cliquer sur crois permet la fermeture du programme
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //Centrer la fentre par rapport à l'écran de  l'odinateur
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        //Centrer la fentre par rapport à l'écran de  l'odinateur
         setLocationRelativeTo(null);
 
         //Creation du panneau bouton pane qui va contenir nos boutons ****************************************************************
@@ -112,34 +112,24 @@ public class AffichageSimple extends JFrame {
         boutonPane2.add(bouton2);
 
         boutonPane3.add(bouton3);
-        //Definition du Layout
 
-        content.setLayout(cardL);
         //4 ligne sur 1 colonnes
         GridLayout gl = new GridLayout();
 
-        gl.setColumns(
-                1);
-        gl.setRows(
-                4);
+        gl.setColumns(4);
+        gl.setRows(2);
         setLayout(gl);
+        
         //ajout des panneaux boutonPane et content à notre fenetre
-
         getContentPane()
                 .add(label1);
         getContentPane()
                 .add(bouton1);
-       /*getContentPane()
-                .add(texte1);*/
         getContentPane()
                 .add(bouton2);
         getContentPane()
-                .add(label2);
-        getContentPane()
                 .add(bouton3);
-        getContentPane()
-                .add(content);
-
+        pack();
     }
 
     static public void affichermenu1() {
