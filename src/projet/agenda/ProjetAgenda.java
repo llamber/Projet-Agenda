@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JFrame;
 /**
  *
  * @author Ludo
@@ -30,7 +30,8 @@ public class ProjetAgenda {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-
+        AffichageSimple maFenetre = new AffichageSimple();
+        maFenetre.setVisible(true);
         Scanner sc = new Scanner(System.in);
         int choix1 = 0;
         do {
