@@ -18,6 +18,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
@@ -85,7 +86,8 @@ public class fenetre3 extends JFrame {
             String modifhDebut = jop.showInputDialog(null, "Ajouter la nouvelle heure de début", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
             String modifhFin = jop.showInputDialog(null, "Ajouter la nouvelle heure de fin", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
             String modiflibelle = jop.showInputDialog(null, "Ajouter le nouveau commentaire", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
-            jop.showMessageDialog(null, "Le rendez-vous est le " + modifDate + " de " + modifhDebut + " a " + modifhFin + "\n" + "Commentaire : " + modiflibelle , "Identité", JOptionPane.INFORMATION_MESSAGE); 
+            jop.showMessageDialog(null, "Le rendez-vous est le " + modifDate + " de " + modifhDebut + " a " + modifhFin + "\n" + "Commentaire : " + modiflibelle , "Identité", JOptionPane.INFORMATION_MESSAGE);
+            
         }
         });
         
@@ -103,8 +105,9 @@ public class fenetre3 extends JFrame {
             String saisiRappel = jop3.showInputDialog(null, "Ajouter un commentaire", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
             //Creation du RDV il manque l'ajout de ce rendez vous dans l'agenda
             GestionAgendaIHM.créerRdv(saisiDate, saisiHeureDebut, saisiHeureFin, saisiLibelle, saisiRappel);
-            jop4.showMessageDialog(null, "Le rendez-vous est le " + saisiDate + " de " + saisiHeureDebut + " a " + saisiHeureFin + "\n" + "Commentaire : " + saisiLibelle , "Identité", JOptionPane.INFORMATION_MESSAGE); 
-        }
+            jop4.showMessageDialog(null, "Le rendez-vous est le " + saisiDate + " de " + saisiHeureDebut + " a " + saisiHeureFin + "\n" + "Commentaire : " + saisiLibelle , "Identité", JOptionPane.INFORMATION_MESSAGE);
+            
+        }   
         });
         
         //Supprimer un RDV
