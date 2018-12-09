@@ -97,7 +97,7 @@ public class fenetre3 extends JFrame {
         public void actionPerformed(java.awt.event.ActionEvent e) 
         {
             JOptionPane jop7 = new JOptionPane();
-            jop7.showMessageDialog(null, "Tous les rendez vous sont supprimés", "Identité", JOptionPane.INFORMATION_MESSAGE); 
+            jop7.showMessageDialog(null, "Tous les RDV sont supprimés", "Identité", JOptionPane.INFORMATION_MESSAGE); 
         }
         });
         bouton6.addActionListener(new ActionListener()
