@@ -41,12 +41,12 @@ public class GestionAgenda implements Serializable {
                 break;
         }
     }
-
+    
+  
     /**
      * @return
      */
     static public void traiterChoixCreerAgenda() {
-
         AffichageSimple.afficherSaisiNom();
         Scanner sc = new Scanner(System.in);
         String nom = sc.nextLine();
@@ -66,7 +66,6 @@ public class GestionAgenda implements Serializable {
         Scanner sc = new Scanner(System.in);
         String nomAgenda = sc.nextLine();
         Agenda agendaOuvert = load(nomAgenda);
-        gererAgenda(agendaOuvert);
     }
 
     /**
@@ -81,7 +80,7 @@ public class GestionAgenda implements Serializable {
             traiterChoixMenu2(choix, agenda);
         } while (choix != 7);
         try {
-            save(agenda,agenda.getNom());
+            save(agenda, agenda.getNom());
         } catch (IOException ex) {
             Logger.getLogger(ProjetAgenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,19 +95,14 @@ public class GestionAgenda implements Serializable {
         AffichageSimple.affichageTraitementMenu2(choix);
 
         switch (choix) {
-            case 0:
-                AffichageSimple.afficherRdv(agenda);
-                break;
+
             case 1:
                 traiterChoixAfficherRDV_Entre2Dates(agenda);
                 break;
-
             case 2:
-                traiterChoixAfficherRDV_SurCritères(agenda);
+                AffichageSimple.afficherRdv(agenda);
                 break;
-
             case 3:
-
                 traiterChoixModifierRDV(agenda);
                 break;
 
@@ -144,26 +138,6 @@ public class GestionAgenda implements Serializable {
     /**
      * @param agenda
      */
-    public static void traiterChoixAfficherRDV_SurCritères(Agenda agenda) {
-        Scanner sc = new Scanner(System.in);
-        int choix = sc.nextInt();
-        AffichageSimple.afficherRDV_SurCritères(agenda, choix);
-        switch (choix) {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-        }
-    }
-
     /**
      * @param agenda
      */
@@ -306,7 +280,7 @@ public class GestionAgenda implements Serializable {
     public static Agenda load(String nomAgenda) throws IOException, ClassNotFoundException {
         FileInputStream fis;
         ObjectInputStream ois;
-        fis = new FileInputStream("Fichier");
+        fis = new FileInputStream(nomAgenda);
         ois = new ObjectInputStream(fis);
         Agenda ag;
         ag = (Agenda) ois.readObject();

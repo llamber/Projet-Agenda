@@ -7,7 +7,6 @@ package Vue;
 
 import Modele.*;
 import java.util.Collections;
-import Modele.Agenda;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,8 +18,9 @@ import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.File;
 import javax.swing.JOptionPane;
-import projet.agenda.GestionAgenda;
+import projet.agenda.*;
 
 /**
  *
@@ -46,7 +46,7 @@ public class AffichageSimple extends JFrame {
         //Taille nom modifiable par l'utilisateur
         setResizable(false);
         //Cliquer sur crois permet la fermeture du programme
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Centrer la fentre par rapport à l'écran de  l'odinateur
         setLocationRelativeTo(null);
 
@@ -56,17 +56,14 @@ public class AffichageSimple extends JFrame {
         bouton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                //Agenda ag = new Agenda(nomag.getText());
-                //JOptionPane.showMessageDialog(, "Printing complete");
-
                 JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
                 String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
+                File file = null;
+                while ((file = new File(nom)).exists()) {
+                    nom = jop.showInputDialog(null, "Ce nom existe déjà, veuillez en saisir un nouveau", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
+                }
                 jop2.showMessageDialog(null, "Votre nom est " + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
-
-                /*if((JButton)e.getSource()==bouton1) {
-                    new fenetre2().setVisible(true);
-                    setVisible(false);
-                }*/
+                GestionAgendaIHM.creerAgenda(nom);
             }
         });
 
@@ -79,10 +76,13 @@ public class AffichageSimple extends JFrame {
                 //JOptionPane.showMessageDialog(, "Printing complete");
                 JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
                 String nom = jop.showInputDialog(null, "Bonjour veuillez saisir le nom de votre agenda", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
-
+                File file = null;
+                while (!(file = new File(nom)).exists()) {
+                    nom = jop.showInputDialog(null, "Cet agenda n'existe pas", "L&P calendar", JOptionPane.QUESTION_MESSAGE);
+                }
+                
                 jop2.showMessageDialog(
                         null, "vous avez récupérer l'agenda de" + nom, "Identité", JOptionPane.INFORMATION_MESSAGE);
-                Agenda ag = new Agenda(nom);
                 //dire que 
                 if (nom != null) {
                     if ((JButton) e.getSource() == bouton2) {
@@ -119,7 +119,7 @@ public class AffichageSimple extends JFrame {
         gl.setColumns(4);
         gl.setRows(2);
         setLayout(gl);
-        
+
         //ajout des panneaux boutonPane et content à notre fenetre
         getContentPane()
                 .add(label1);
@@ -142,7 +142,7 @@ public class AffichageSimple extends JFrame {
         System.out.println("Bonjour Bienvenue dans le Menu de gestion d'agenda");
         //Instruction du menu
         System.out.println("Taper 1 : Afficher tous les RDV entre 2 dates");
-        System.out.println("Taper 2 : Afficher les RDV filtrés sur critère(s)");
+        System.out.println("Taper 2 : Afficher tous les RDV");
         System.out.println("Taper 3 : Modifier un RDV");
         System.out.println("Taper 4 : Ajouter un RDV");
         System.out.println("Taper 5 : Supprimer un RDV");
@@ -241,10 +241,10 @@ public class AffichageSimple extends JFrame {
     static public void afficherRdv(Agenda agenda) {
         Collections.sort(agenda.getListeRdv(), RendezVous.Comparator);
         for (int i = 0; i < agenda.getListeRdv().size(); i++) {
-            System.out.println(i + " - Date: " + agenda.getListeRdv().get(i).getDate());
-            System.out.println("Heure: " + agenda.getListeRdv().get(i).getHeureDebut() + " - " + agenda.getListeRdv().get(i).getHeureFin());
-            System.out.println("Libelle: " + agenda.getListeRdv().get(i).getLibelle());
-            System.out.println("Rappel:  " + agenda.getListeRdv().get(i).isRappel() + "\n" + "\n");
+            System.out.println(i + " - Date: " + agenda.getListeRdv().get(i).getDate()+
+                    "\nHeure: " + agenda.getListeRdv().get(i).getHeureDebut() + " - " + agenda.getListeRdv().get(i).getHeureFin()+
+                    "\nLibelle: " + agenda.getListeRdv().get(i).getLibelle()+
+                    "\nRappel:  " + agenda.getListeRdv().get(i).isRappel() + "\n" + "\n");
         }
     }
 
